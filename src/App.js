@@ -3,15 +3,18 @@ import React from 'react';
 import {Header} from './components'; 
 import {Cart, Home} from './pages'
 import { Route, Routes } from 'react-router';
+import axios from 'axios';
 
 function App() {
   
   const [pizzas, setPizzas] = React.useState([]);
   console.log(pizzas)
   React.useEffect(() => {
-    fetch('http://localhost:3000/db.json').then((resp) => resp.json()).then(json =>{
-      setPizzas(json.pizzas)
+    axios.get('http://localhost:3000/db.json').then(({data}) =>{
+      setPizzas(data.pizzas)
+
     })
+    
   }, [])
 
   return (
